@@ -1,11 +1,17 @@
 Selective Confidence Intervals
 ===========
 
-Implement selective confidence intervals in [1]
+Compute confidence intervals for selected parameters as described in [1] and [2].
+
+
+
 
 Reference
 ----------------------
-[1] Weinstein, Asaf, William Fithian, and Yoav Benjamini. “Selection Adjusted Confidence Intervals With More Power to Determine the Sign.” Journal of the American Statistical Association 108, no. 501 (2013): 165–176. doi:10.1080/01621459.2012.737740.
+[1] Weinstein, Asaf, William Fithian, and Yoav Benjamini. “Selection Adjusted Confidence Intervals With More Power to Determine the Sign.” Journal of the American Statistical Association 108, no. 501 (2013): 
+
+[2] Benjamini, Y., and D. Yekutieli. 2005. “False Discovery Rate-Adjusted Multiple Confidence Intervals for Selected Parameters.” Journal of the American Statistical Association 100 (469): 71–81.
+
 
 
 Installation
