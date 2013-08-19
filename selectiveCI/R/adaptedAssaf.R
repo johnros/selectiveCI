@@ -334,7 +334,6 @@ QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
 # cutoff (positive threshold) and 
 # alpha (level of the test)
 QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
-  
   if (x<0) {
     tmp <- QuasiConventionalCI(-x,sigsq,lambda,cutoff,alpha)
     lower <- -tmp$upper

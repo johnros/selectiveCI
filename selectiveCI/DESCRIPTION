@@ -7,4 +7,6 @@ Author: Jonathan Rosenblatt and Asaf Weinstein
 Maintainer: Jonathan Rosenblatt <john.ros.work@gmail.com>
 Description: Computes several types of CIs for selected parameters following the methods in the references.
 License: MIT
-Collate: 'adaptedAssaf.R'
+Collate: 
+  'adaptedAssaf.R'
+  'BY2005.R'
