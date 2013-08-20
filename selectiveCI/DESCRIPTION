@@ -10,3 +10,4 @@ License: MIT
 Collate: 
   'adaptedAssaf.R'
   'BY2005.R'
+  'utility.R'
