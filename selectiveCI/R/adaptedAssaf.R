@@ -197,7 +197,7 @@ ModifiedPrattAR <- function(theta,ratio,cutoff,alpha){
 
 
 # inputs are: x (value of observation, |x|>cutoff), sigsq (a known value for the variance of X), r (the maximum of the ration between the MP interval and the usual two-sided interavl), cutoff (positive threshold) and alpha (level of the test)
-ModifiedPrattCI <- function(x,sigsq,r,cutoff,alpha) {
+ModifiedPrattCI <- function(x, sigsq , ratio, cutoff, alpha) {
   
   if (x<0) {
     tmp <- ModifiedPrattCI(-x,sigsq,ratio,cutoff,alpha)
@@ -261,6 +261,9 @@ ModifiedPrattCI <- function(x,sigsq,r,cutoff,alpha) {
   CI <- list(lower = lower, upper = upper)
   return(CI)
 }
+## Testing:
+#ModifiedPrattCI(10, 1 , ratio=1.5, cutoff=1, alpha=0.05)
+  
 
 
 
