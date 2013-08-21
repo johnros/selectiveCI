@@ -25,7 +25,7 @@ ShortestAR <- function(theta,cutoff,alpha){
   # theta2 - cutoff cannot be greater than qnorm(1 - alpha/2)!
   
   if (theta<0) {
-    tmp <- Recall(-theta,cutoff,alpha)
+    tmp <- Recall(theta=-theta, cutoff=cutoff, alpha=alpha)
     A <- -rev(tmp$A)
     l <- tmp$l
   }
@@ -84,7 +84,7 @@ ShortestCI <- function(x, sigsq, cutoff, alpha) {
   stopifnot(abs(x) > cutoff)
   
   if (x<0) {
-    tmp <- Recall(-x,sigsq,cutoff,alpha)
+    tmp <- Recall(x=-x, sigsq=sigsq, cutoff=cutoff, alpha=alpha)
     lower <- -tmp$upper
     upper <- -tmp$lower
   } else {
@@ -285,7 +285,7 @@ QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
   thetaprime1 <- uniroot(f, c(b, theta1))$root
   
   if (theta<0) {
-    tmp <- Recall(-theta,lambda,cutoff,alpha)
+    tmp <- Recall(theta=-theta, lambda=lambda, cutoff=cutoff, alpha=alpha)
     A <- -rev(tmp)
   } else {
     
@@ -338,7 +338,7 @@ QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
 # alpha (level of the test)
 QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
   if (x<0) {
-    tmp <- Recall(-x,sigsq,lambda,cutoff,alpha)
+    tmp <- Recall(x=-x, sigsq=sigsq, lambda=lambda, cutoff=cutoff, alpha=alpha)
     lower <- -tmp$upper
     upper <- -tmp$lower
   } else {
@@ -402,7 +402,7 @@ QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
       lower <- uniroot(f,c(0 - 1e-1, thetamax - 1e-1)) $ root
     }
     if (x >= xprime3 ) {
-      lower <- ShortestCI(x,cutoff,alpha)$lower
+      lower <- ShortestCI(x=x, sigsq=sigsq, cutoff=cutoff, alpha=alpha)$lower
     }
     
     #obtain upper end of CI
@@ -420,7 +420,7 @@ QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
   return(CI)
 }
 ## Testing:
-#QuasiConventionalCI(x=2, sigsq=1, lambda=2, cutoff=1, alpha=0.05)
+#QuasiConventionalCI(x=-2, sigsq=1, lambda=2, cutoff=1, alpha=0.05)
 
 
 
