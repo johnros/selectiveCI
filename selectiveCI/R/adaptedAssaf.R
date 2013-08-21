@@ -285,7 +285,7 @@ QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
   thetaprime1 <- uniroot(f, c(b, theta1))$root
   
   if (theta<0) {
-    tmp <- QuasiConventionalAR(-theta,lambda,cutoff,alpha)
+    tmp <- Recall(-theta,lambda,cutoff,alpha)
     A <- -rev(tmp)
   } else {
     
@@ -338,7 +338,7 @@ QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
 # alpha (level of the test)
 QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
   if (x<0) {
-    tmp <- QuasiConventionalCI(-x,sigsq,lambda,cutoff,alpha)
+    tmp <- Recall(-x,sigsq,lambda,cutoff,alpha)
     lower <- -tmp$upper
     upper <- -tmp$lower
   } else {
@@ -419,6 +419,8 @@ QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
   CI <- list(lower = lower, upper = upper)
   return(CI)
 }
+## Testing:
+#QuasiConventionalCI(x=2, sigsq=1, lambda=2, cutoff=1, alpha=0.05)
 
 
 
