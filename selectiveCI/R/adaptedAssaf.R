@@ -25,7 +25,7 @@ ShortestAR <- function(theta,cutoff,alpha){
   # theta2 - cutoff cannot be greater than qnorm(1 - alpha/2)!
   
   if (theta<0) {
-    tmp <- ShortestAR(-theta,cutoff,alpha)
+    tmp <- Recall(-theta,cutoff,alpha)
     A <- -rev(tmp$A)
     l <- tmp$l
   }
@@ -84,7 +84,7 @@ ShortestCI <- function(x, sigsq, cutoff, alpha) {
   stopifnot(abs(x) > cutoff)
   
   if (x<0) {
-    tmp <- ShortestCI(-x,sigsq,cutoff,alpha)
+    tmp <- Recall(-x,sigsq,cutoff,alpha)
     lower <- -tmp$upper
     upper <- -tmp$lower
   } else {
