@@ -32,19 +32,19 @@ ModifiedPrattCI(x, sigsq, ratio, cutoff, alpha)
 
 \arguments{
   \item{theta}{
-The location parameter of the unconditional underlying distribution.
+  The location parameter of the unconditional underlying distribution.
 }
-  \item{cutoff}{
-The buondary of the selection region in absolute value.
+  \item{cutoff}{ 
+  The selection cutoff.
 }
   \item{alpha}{
-The area under the density or the confidence level of the CI.
+  The area under the density or the confidence level of the CI.
 }
   \item{x}{
-Observed value of X (naturaly abs(x)>c).
+  Observed value of the parameter estimate X (naturaly abs(X)>c).
   }
   \item{sigsq}{
-The variance of X.
+  The variance of X.
   }
 }
 
@@ -53,31 +53,28 @@ The variance of X.
 
   \code{\link{ShortestAR}}, \code{\link{ModifiedPrattAR}}, and \code{\link{QuasiConventionalAR}} will return intervals containing \eqn{1-\alpha} probaility from the distribution of \eqn{X s.t. |X|>c}.
   
-More details can be found in the reference.
+  More details can be found in the reference.
 }
 
 \value{
 Confidence interval functions will return the upper and lower bound of the confidence interval.
   
   Acceptance regions functions will return a list containing:
-  \item{a}{Two intervals which union contain \eqn{1-\alpha} of the probability}
+  \item{a}{A \eqn{1-\alpha} confidence set which is the union of two intervals.}
   \item{length}{The total length of the intervals}  
 }
 
 \references{
-[1] Weinstein, Asaf, William Fithian, and Yoav Benjamini. 2013. “Selection Adjusted Confidence Intervals With More Power to Determine the Sign.” Journal of the American Statistical Association 108 (501): 165–176. 
+[1] Weinstein, Asaf, William Fithian, and Yoav Benjamini. 2013. "Selection Adjusted Confidence Intervals With More Power to Determine the Sign." Journal of the American Statistical Association 108 (501): 165-176. 
 }
 
 \author{
 Jonathan Rosenblatt and Asaf Weinstein
 }
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
-ShortestAR(theta=1, cutoff=1, alpha=0.05)
-ShortestCI(x=1.9, sigsq=1, cutoff=1, alpha=0.01) 
+  ShortestAR(theta=1, cutoff=1, alpha=0.05)
+  ShortestCI(x=1.9, sigsq=1, cutoff=1, alpha=0.01) 
 }
 \keyword{univar}
 \keyword{htest}

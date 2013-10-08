@@ -1,7 +1,7 @@
 Package: selectiveCI
 Type: Package
 Title: Computes CI for selected parameters
-Version: 0.30.0
+Version: 0.4.0
 Date: 2013-08-19
 Author: Jonathan Rosenblatt and Asaf Weinstein
 Maintainer: Jonathan Rosenblatt <john.ros.work@gmail.com>

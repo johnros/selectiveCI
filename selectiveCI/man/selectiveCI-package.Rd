@@ -22,19 +22,15 @@ Maintainer: Jonathan Rosenblatt <john.ros.work@gmail.com>
 }
 
 \references{
-[1] Weinstein, Asaf, William Fithian, and Yoav Benjamini. 2013. “Selection Adjusted Confidence Intervals With More Power to Determine the Sign.” Journal of the American Statistical Association 108 (501): 165–176. 
+[1] Weinstein, Asaf, William Fithian, and Yoav Benjamini. 2013. "Selection Adjusted Confidence Intervals With More Power to Determine the Sign." Journal of the American Statistical Association 108 (501): 165-176. 
 
-[2] Benjamini, Y., and D. Yekutieli. 2005. “False Discovery Rate-Adjusted Multiple Confidence Intervals for Selected Parameters.” Journal of the American Statistical Association 100 (469): 71–81.
-
+[2] Benjamini, Y., and D. Yekutieli. 2005. "False Discovery Rate-Adjusted Multiple Confidence Intervals for Selected Parameters." Journal of the American Statistical Association 100 (469): 71-81.
 }
 
-\keyword{ package }
+\keyword{package}
 \keyword{univar}
 \keyword{htest}
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
 \examples{
-~~ simple examples of the most important functions ~~
+  ShortestAR(theta=1, cutoff=1, alpha=0.05)
+  ShortestCI(x=1.9, sigsq=1, cutoff=1, alpha=0.01) 
 }

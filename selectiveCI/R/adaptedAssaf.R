@@ -459,6 +459,7 @@ LikelihoodRatioCI <- function(x, cutoff, alpha){
 
 # this CI is quantile-based
 QuantileCI <- function(x, cutoff, alpha){
+  Q <- function(theta) 1 - pnorm(cutoff + theta) + 1 - pnorm(cutoff - theta)  
   f <- function(theta) 1 - pnorm(x - theta) - alpha / 2 * Q(theta)
   lower <- uniroot(f, c(-cutoff - qnorm(1 - alpha / 2), x - qnorm(1 - alpha / 2))) $ root
   f <- function(theta) pnorm(theta - x) - (1 - alpha / 2) * Q(theta)
