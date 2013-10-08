@@ -367,7 +367,6 @@ QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
   checkLambda(lambda)
   checkCutoff(cutoff)
   checkAlpha(alpha)
-  
     
   if (x<0) {
     tmp <- Recall(x=-x, sigsq=sigsq, lambda=lambda, cutoff=cutoff, alpha=alpha)
@@ -499,7 +498,7 @@ QuantileCI <- function(x, cutoff, alpha){
   checkX(x, cutoff)
   checkCutoff(cutoff)
   checkAlpha(alpha)
-  
+
   
   Q <- function(theta) 1 - pnorm(cutoff + theta) + 1 - pnorm(cutoff - theta)  
   f <- function(theta) 1 - pnorm(x - theta) - alpha / 2 * Q(theta)
