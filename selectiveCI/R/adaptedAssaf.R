@@ -16,6 +16,8 @@
 # inputs are: theta (value of location parameter), cutoff (positive threshold) and alpha (level of the test)
 # Note: ARs are constructed for sigsq=1; This is enough to obtain a CI for a general sigsq (proper modification is made in the CI function)
 ShortestAR <- function(theta,cutoff,alpha){
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1)
+  
   Q <- function(theta) 1 - pnorm(cutoff + theta) + 1 - pnorm(cutoff - theta)	
   #compute useful quantities
   f <- function(theta) ( pnorm(cutoff + theta) - pnorm(cutoff - theta) ) - (1 - alpha) * Q(theta)
@@ -81,7 +83,7 @@ ShortestAR <- function(theta,cutoff,alpha){
 # cutoff (positive threshold) and 
 # alpha (level of the test)
 ShortestCI <- function(x, sigsq, cutoff, alpha) {
-  stopifnot(abs(x) > cutoff)
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && abs(x) > cutoff)
   
   if (x<0) {
     tmp <- Recall(x=-x, sigsq=sigsq, cutoff=cutoff, alpha=alpha)
@@ -138,6 +140,8 @@ ShortestCI <- function(x, sigsq, cutoff, alpha) {
 
 # inputs are: theta (value of location parameter), r (the maximum of the ration between the MP interval and the usual two-sided interavl), cutoff (positive threshold) and alpha (level of the test)
 ModifiedPrattAR <- function(theta,ratio,cutoff,alpha){
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && ratio > 0 )
+  
   Q <- function(theta) 1 - pnorm(cutoff + theta) + 1 - pnorm(cutoff - theta)
   #compute useful quantities
   f <- function(theta) ( pnorm(cutoff + theta) - pnorm(cutoff - theta) ) - (1 - alpha) * Q(theta)
@@ -198,6 +202,7 @@ ModifiedPrattAR <- function(theta,ratio,cutoff,alpha){
 
 # inputs are: x (value of observation, |x|>cutoff), sigsq (a known value for the variance of X), r (the maximum of the ration between the MP interval and the usual two-sided interavl), cutoff (positive threshold) and alpha (level of the test)
 ModifiedPrattCI <- function(x, sigsq , ratio, cutoff, alpha) {
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && abs(x) > cutoff && ratio > 0)
   
   if (x<0) {
     tmp <- ModifiedPrattCI(-x,sigsq,ratio,cutoff,alpha)
@@ -273,6 +278,8 @@ ModifiedPrattCI <- function(x, sigsq , ratio, cutoff, alpha) {
 # cutoff (positive threshold) and 
 # alpha (level of the test)
 QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && lambda > 0)
+  
   Q <- function(theta) 1 - pnorm(cutoff + theta) + 1 - pnorm(cutoff - theta)
   #compute useful quantities
   f <- function(theta) ( pnorm(cutoff + theta) - pnorm(cutoff - theta) ) - (1 - alpha) * Q(theta)
@@ -337,6 +344,8 @@ QuasiConventionalAR <- function(theta, lambda, cutoff, alpha){
 # cutoff (positive threshold) and 
 # alpha (level of the test)
 QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && abs(x) > cutoff && lambda > 0 && sigsq > 0)
+    
   if (x<0) {
     tmp <- Recall(x=-x, sigsq=sigsq, lambda=lambda, cutoff=cutoff, alpha=alpha)
     lower <- -tmp$upper
@@ -436,6 +445,8 @@ QuasiConventionalCI <- function(x, sigsq, lambda ,cutoff ,alpha){
 
 # this one is based on the likelihood ratio
 LikelihoodRatioCI <- function(x, cutoff, alpha){
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && abs(x) > cutoff )
+  
   log.cond.lik <- function(theta) log( dnorm(x - theta) / (1 - pnorm(cutoff - theta) + 1 - pnorm(cutoff + theta)) )
   g <- function(theta) (2 * pi) ^ (-1/2) * (x - theta) * exp(-(x - theta) ^ 2 / 2) * (1 - pnorm(cutoff - theta) + 
                                                                                         1 - pnorm(cutoff + theta)) - dnorm(x - theta) * (dnorm(cutoff - theta) - dnorm(cutoff + theta))
@@ -459,6 +470,9 @@ LikelihoodRatioCI <- function(x, cutoff, alpha){
 
 # this CI is quantile-based
 QuantileCI <- function(x, cutoff, alpha){
+  stopifnot(cutoff >= 0 && alpha >= 0 && alpha <= 1 && abs(x) > cutoff )
+  
+  
   Q <- function(theta) 1 - pnorm(cutoff + theta) + 1 - pnorm(cutoff - theta)  
   f <- function(theta) 1 - pnorm(x - theta) - alpha / 2 * Q(theta)
   lower <- uniroot(f, c(-cutoff - qnorm(1 - alpha / 2), x - qnorm(1 - alpha / 2))) $ root

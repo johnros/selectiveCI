@@ -44,7 +44,7 @@ ModifiedPrattCI(x, sigsq, ratio, cutoff, alpha)
   Observed value of the parameter estimate X (naturaly abs(X)>c).
   }
   \item{sigsq}{
-  The variance of X.
+  The \emph{variance} of X.
   }
 }
 
