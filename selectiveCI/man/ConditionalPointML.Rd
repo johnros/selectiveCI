@@ -8,13 +8,16 @@ Selective point estimation using maximum likelihood.
 Returns a selective maximum likelihood point estimate for the mean of a Gaussian population.
 }
 \usage{
-  ConditionalPointML(x, sigsq, cutoff)
+  ConditionalPointML(x, sigsq, cutoff,init.mu=NA,max.iter=1000,tol=10^-5)
 }
 
 \arguments{
   \item{x}{The observed value from the population.}
   \item{sigsq}{The (known) standard deviation of the population.}
   \item{cutoff}{The selection cutoff.}
+  \item{init.mu}{Starting point for the Newton Raphson algorithm. If NA then the algorithm initializes from the observed value}
+  \item{max.iter}{Maximal number of iteration for the Newton Raphson algorithm.}
+  \item{tol}{The desired accuracy}
 }
 
 %\details{
@@ -23,9 +26,9 @@ Returns a selective maximum likelihood point estimate for the mean of a Gaussian
 
 \value{Returns a numeric value of the estimated mean.}
 
-%\references{
-%% ~put references to the literature/web site here ~
-%}
+\references{
+Benjamini, Yoav, and Amit Meir. "Selective Correlations-the conditional estimators." arXiv preprint arXiv:1412.3242 (2014).‏
+}
 
 \author{
   Amit Meir
