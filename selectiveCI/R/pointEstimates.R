@@ -15,6 +15,10 @@ ConditionalPointML <- function(x,cutoff,sig,init.mu=NA,max.iter=1000,tol=10^-5) 
     return(hess)
   }
   
+  ## If x is a vector then replace x with the mean and the variance with the variance of the mean
+  x <- mean(x)
+  sig <- sig/sqrt(length(x))
+  
   if(abs(x)<cutoff) {
     warning("abs(x) is less than the cutoff value")
   }
@@ -29,12 +33,13 @@ ConditionalPointML <- function(x,cutoff,sig,init.mu=NA,max.iter=1000,tol=10^-5) 
     hess <- comp.hess(x,muhat,sig,cutoff)
     
     muhat <- muhat - grad/hess
-
+    
     if(abs(muhat-old.muhat)<tol) break
   }
   
   return(muhat)
 }
+
 
 
 ##Testing
