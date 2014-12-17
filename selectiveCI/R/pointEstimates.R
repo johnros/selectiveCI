@@ -1,4 +1,4 @@
-ConditionalPointML <- function(x,cutoff,sig,init.mu=NA,max.iter=1000,tol=10^-5) {
+ConditionalPointML <- function(x,cutoff,sigsq,init.mu=NA,max.iter=1000,tol=10^-5) {
   comp.power <- function(mu,sig,cutoff) 1-pnorm(cutoff,mean=mu,sd=sig)+pnorm(-cutoff,mean=mu,sd=sig)
   phi <- function(c) dnorm(c,mean=muhat,sd=sig)
   
@@ -17,7 +17,7 @@ ConditionalPointML <- function(x,cutoff,sig,init.mu=NA,max.iter=1000,tol=10^-5) 
   
   ## If x is a vector then replace x with the mean and the variance with the variance of the mean
   x <- mean(x)
-  sig <- sig/sqrt(length(x))
+  sig <- sqrt(sigsq/length(x))
   
   if(abs(x)<cutoff) {
     warning("abs(x) is less than the cutoff value")
