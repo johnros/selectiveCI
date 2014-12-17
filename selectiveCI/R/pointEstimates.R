@@ -1,11 +1,41 @@
-ConditionalPointML <- function(x,sigsq,cutoff) {
-  if(abs(x)<cutoff) {
-    warning("abs(x) is less than the cutoff value!")
+ConditionalPointML <- function(x,cutoff,sig,init.mu=NA,max.iter=1000,tol=10^-5) {
+  comp.power <- function(mu,sig,cutoff) 1-pnorm(cutoff,mean=mu,sd=sig)+pnorm(-cutoff,mean=mu,sd=sig)
+  phi <- function(c) dnorm(c,mean=muhat,sd=sig)
+  
+  comp.grad <- function(x,mu,sig,cutoff) {
+    Qc <- comp.power(mu,sig,cutoff)
+    (x-mu)/sig^2 - (phi(cutoff)-phi(-cutoff))/Qc
   }
-  f <- function(mu,x,cutoff) dnorm(x,mean=mu,sd=sqrt(sigsq))/(1-pnorm(cutoff,mean=mu,sd=sqrt(sigsq))+pnorm(-cutoff,mean=mu,sd=sqrt(sigsq)))
-  muhat <- suppressWarnings(optimize(f,interval=c(-6,6),x,cutoff,maximum=TRUE)[[1]])
+  comp.hess <- function(x,mu,sig,cutoff) {
+    Qc <- comp.power(mu,sig,cutoff)
+    hess <- Qc*(phi(cutoff)*(cutoff-mu)/sig^2+phi(-cutoff)*(cutoff+mu)/sig^2) + 
+      (phi(cutoff)-phi(-cutoff))^2
+    hess <- -hess/Qc^2
+    hess <- hess-1/sig^2
+    return(hess)
+  }
+  
+  if(abs(x)<cutoff) {
+    warning("abs(x) is less than the cutoff value")
+  }
+  
+  if(is.na(init.mu)) init.mu <- x
+  muhat <- init.mu
+  
+  for(i in 1:max.iter) {
+    old.muhat <- muhat
+    
+    grad <- comp.grad(x,muhat,sig,cutoff)
+    hess <- comp.hess(x,muhat,sig,cutoff)
+    
+    muhat <- muhat - grad/hess
+
+    if(abs(muhat-old.muhat)<tol) break
+  }
+  
   return(muhat)
 }
+
 
 ##Testing
 # ConditionalPointML(0,1,1)
